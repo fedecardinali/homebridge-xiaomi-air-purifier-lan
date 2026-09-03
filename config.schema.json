@@ -1,0 +1,67 @@
+{
+  "pluginAlias": "XiaomiAirPurifierLan",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "LAN-only control for Xiaomi Air Purifier 4 Compact (zhimi.airp.cpa4). Exposes one native purifier control plus air-quality and filter data, with no auxiliary switches.",
+  "footerDisplay": "The miio token remains in the local Homebridge configuration and is never logged or sent to a cloud service.",
+  "schema": {
+    "type": "object",
+    "required": ["devices"],
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "Xiaomi Air Purifier LAN"
+      },
+      "devices": {
+        "title": "Purifiers",
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "title": "Xiaomi Air Purifier 4 Compact",
+          "type": "object",
+          "required": ["name", "ip", "token"],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "title": "Name",
+              "type": "string",
+              "default": "Purificador de aire"
+            },
+            "ip": {
+              "title": "IP Address",
+              "type": "string",
+              "format": "ipv4"
+            },
+            "token": {
+              "title": "miio Token",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{32}$",
+              "minLength": 32,
+              "maxLength": 32
+            },
+            "pollInterval": {
+              "title": "Poll Interval (ms)",
+              "type": "integer",
+              "minimum": 3000,
+              "default": 5000
+            }
+          }
+        }
+      }
+    }
+  },
+  "layout": [
+    { "key": "name" },
+    {
+      "key": "devices",
+      "type": "array",
+      "items": [
+        "devices[].name",
+        "devices[].ip",
+        "devices[].token",
+        "devices[].pollInterval"
+      ]
+    }
+  ]
+}
